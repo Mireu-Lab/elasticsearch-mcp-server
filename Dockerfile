@@ -3,12 +3,13 @@ FROM python:3.10-slim
 
 # 작업 디렉토리 설정
 WORKDIR /app
+# 저장소 복제
+COPY . .
 
 # Git 설치
-RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/*
-
-# 저장소 복제
-RUN . .
+RUN apt-get update &&\
+    apt-get upgrade -y &&\
+    rm -rf /var/lib/apt/lists/*
 
 # Python 의존성 설치
 RUN pip install --no-cache-dir -r requirements.txt
