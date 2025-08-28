@@ -26,4 +26,4 @@ ENV ELASTIC_USERNAME="" \
 EXPOSE 8080
 
 # 9. 서버 실행
-CMD ["python", "-m", "src.server", "streamable-http", "--host", "0.0.0.0", "--port", "8080"]
+CMD "uv run src/server.py elasticsearch-mcp-server --transport sse --host 0.0.0.0 --port 8000 --path /sse"
