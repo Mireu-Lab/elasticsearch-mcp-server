@@ -10,7 +10,7 @@ COPY . .
 RUN apk update &&\
     apk add --no-cache git
 
-RUN git clone https://github.com/Mireu-Lab/elasticsearch-mcp-server.git .
+RUN git clone https://github.com/Mireu-Lab/elasticsearch-mcp-server.git /app
 
 # Python 의존성 설치
 RUN pip install --no-cache-dir -r requirements.txt
