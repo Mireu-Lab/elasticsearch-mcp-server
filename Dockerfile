@@ -1,5 +1,5 @@
 # Python 3.10을 기반 이미지로 사용
-FROM python:3.10-slim
+FROM python:3-alpine
 
 # 작업 디렉토리 설정
 WORKDIR /app
@@ -7,11 +7,8 @@ WORKDIR /app
 COPY . .
 
 # Git 설치
-RUN apt-get update &&\
-    apt-get upgrade -y &&\
-    rm -rf /var/lib/apt/lists/* &&\
-    apt-get install -y git &&\
-    apt-get clean
+RUN apk update &&\
+    apk add --no-cache git
 
 RUN git clone https://github.com/Mireu-Lab/elasticsearch-mcp-server.git .
 
