@@ -9,7 +9,11 @@ COPY . .
 # Git 설치
 RUN apt-get update &&\
     apt-get upgrade -y &&\
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* &&\
+    apt-get install -y git &&\
+    apt-get clean
+
+RUN git clone https://github.com/Mireu-Lab/elasticsearch-mcp-server.git .
 
 # Python 의존성 설치
 RUN pip install --no-cache-dir -r requirements.txt
