@@ -9,17 +9,13 @@ WORKDIR /app
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 # 4. 의존성 및 메타데이터 정의 파일들 먼저 복사 (Docker 캐시 효율 극대화)
-COPY pyproject.toml uv.lock ./
-COPY LICENSE ./
+COPY . .
 
 # 5. 의존성 설치 (빌드용 패키지는 설치 후 즉시 제거)
 # 'pip install .' 명령어는 pyproject.toml을 읽어 프로젝트와 의존성을 모두 설치합니다.
 RUN apk add --no-cache --virtual .build-deps gcc musl-dev && \
     pip install --no-cache-dir . && \
     apk del .build-deps
-
-# 6. 소스 코드 복사
-COPY src ./src
 
 # 7. 생성한 비-루트 사용자로 전환 (보안 강화)
 USER appuser
